@@ -51,11 +51,13 @@ Add above command to package.json scripts section **"format:check": "prettier --
 ```
 >> npm run format:check
 ```
-**Setting up repository and workflow**
----------
-CODEOWNERS file inside .github  - [https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-code-owners](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-code-owners)
+
+## **Setting up repository and workflow**
+
+CODEOWNERS file inside .github - [https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-code-owners](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-code-owners)
 
 Next go to Project (react-app) Settings -> Branches
+
 1. Add Rule under branch protection rule
 2. Type master in pattern
 3. Set checkbox - Require pull request, stale merge dismiss, code owners
@@ -70,4 +72,5 @@ Let us create a branch with name "config/workflow"
  >> git checkout -b config/workflow
  >> git push --set-upstream origin config/workflow
 ```
+
 In github you can't approve your own PR, so create another github account (thanujtk - thanuj.kumar@gmail.com) and add him as reviewer (CODEOWNERS)
