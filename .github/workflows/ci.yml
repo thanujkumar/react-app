@@ -1,0 +1,19 @@
+name: CI
+  on:
+    pull_request:
+      branches: [develop]
+
+  jobs:
+    build:
+      runs-on: ubuntu-lastest
+      steps:
+        - uses: actions/checkout@v2.3.4
+        - name: Use NodeJS
+          uses: actions/setupnode@v2.1.5
+          with:
+            node-version: "12.x"
+        - run: npm ci
+        - run: npm format:check
+        - run: npm test -- --coverage
+            env:
+              CI: true

@@ -65,3 +65,9 @@ Next go to Project (react-app) Settings -> Branches
 
 After above we will not be able to push and we need to create PR, for this we need to have a branch (like feature/ bugfix/ etc)
 Let us create a branch with name "config/workflow"
+
+```
+ >> git checkout -b config/workflow
+ >> git push --set-upstream origin config/workflow
+```
+In github you can't approve your own PR, so create another github account (thanujtk - thanuj.kumar@gmail.com) and add him as reviewer (CODEOWNERS)
