@@ -91,3 +91,6 @@ Surge needs login id and token
 ```
 
 Add above as secrets
+
+Next is adding cache to avoid repeated download of node_modules
+Next is have test coverage artifacts shown in build for download
