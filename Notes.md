@@ -30,6 +30,7 @@ my domain name is [https://thanujtk.surge.sh/](https://thanujtk.surge.sh/)
 
 ```
 >> surge (after install surge globally)
+>> npx surge list (when installed globally to list domains owned by you)
 ```
 
 Next is to use code formatting tool like [https://prettier.io/](https://prettier.io/), copy formatting rules from [https://prettier.io/playground/](https://prettier.io/playground/)
@@ -74,3 +75,19 @@ Let us create a branch with name "config/workflow"
 ```
 
 In github you can't approve your own PR, so create another github account (thanujtk - thanuj.kumar@gmail.com) and add him as reviewer (CODEOWNERS)
+Check Actions once pushed to know that PR is built with ci.yml workflow, after this go to settings -> branches and select build for master (means build should be successful to merge to master),
+similarly for develop.
+
+Next to approve PR we need collaborator (thanujtk), project settings -> Manage access -> Invite a collaborator, copy URL https://github.com/thanujkumar/react-app/invitations and accept invite
+Next review changes and approve it so that merge is enabled.
+
+Next when merged to develop we need to run next workflow, we can create a separate yml or add to same ci.yml with conditions.
+
+Surge needs login id and token
+
+```
+>> surge whoami or npx surge whoami (to get login id on your local machine)
+>> surge token or npx surge token (to get token for your id)
+```
+
+Add above as secrets

@@ -1,7 +1,11 @@
 name: CI
 
 on:
+  #when pull-request created run workflow
   pull_request:
+    branches: [develop]
+  #when pushed to develop run workflow
+  push:
     branches: [develop]
 
 jobs:
@@ -18,3 +22,13 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Build Project
+        if: github.event_name == 'push'
+        run: |
+          npm run build
+      - name: Deploy to Staging
+        if: github.event_name == 'push'
+        run: npx surge --project ./build --domain thanujtk.surge.sh
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
