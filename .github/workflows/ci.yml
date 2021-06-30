@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  #when pull-request created to develop run workflow
+  pull_request:
+    branches: [develop, master]
+  #when pushed to develop run workflow
+  push:
+    branches: [develop, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Cache node_modules
+        uses: actions/cache@v2.1.6
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Use NodeJS
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: "12.x"
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test -- --coverage
+        env:
+          CI: true
+      - name: Upload Test Coverage As Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: test-coverage
+          path: coverage
+      - name: Build Project
+        if: github.event_name == 'push'
+        run: |
+          npm run build
+      - name: Upload Build Artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: build-artifact
+          path: build
+      #      - uses: actions/download-artifact@v2.0.10
+      - name: Create a release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Deploy to Staging
+        if: github.event_name == 'push'
+        run: npx surge --project ./build --domain thanujtk.surge.sh
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
