@@ -110,3 +110,11 @@ ex:
 
   fix(store)!: change store api service input and output values
 ```
+
+Next is installing semantic-release npm package
+
+```
+npm install --save-dev semantic-release
+```
+
+Next add **release.config.js** to contain semantic release info
