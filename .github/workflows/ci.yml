@@ -44,6 +44,11 @@ jobs:
         with:
           name: build-artifact
           path: build
+      - name: ZIP Release of Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          zip -r build-artifact.zip ./build
+          zip -r test-coverage.zip ./coverage
       #      - uses: actions/download-artifact@v2.0.10
       - name: Create a release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
