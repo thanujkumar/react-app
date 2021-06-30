@@ -3,10 +3,10 @@ name: CI
 on:
   #when pull-request created to develop run workflow
   pull_request:
-    branches: [develop]
+    branches: [develop, master]
   #when pushed to develop run workflow
   push:
-    branches: [develop]
+    branches: [develop, master]
 
 jobs:
   build:
@@ -45,6 +45,11 @@ jobs:
           name: build-artifact
           path: build
       #      - uses: actions/download-artifact@v2.0.10
+      - name: Create a release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Deploy to Staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain thanujtk.surge.sh
