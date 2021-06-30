@@ -94,18 +94,27 @@ Add above as secrets
 
 Next is adding cache to avoid repeated download of node_modules
 
-Next is to have test coverage artifacts and build  artifact for download
+Next is to have test coverage artifacts and build artifact for download
 
 Next is [https://semver.org/](https://semver.org/) for release **Major.Minor.Patch**
 
 Next is []() for conventional commits
+
 ```
 ex:
   fix(store): change store api service input and output values
   BREAKING CHANGE: input and output needs to adopted
   closes issue #12
-  
+
   OR ! as breaking change
-  
+
   fix(store)!: change store api service input and output values
 ```
+
+Next is installing semantic-release npm package
+
+```
+npm install --save-dev semantic-release
+```
+
+Next add **release.config.js** to contain semantic release info
