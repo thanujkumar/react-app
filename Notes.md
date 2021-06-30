@@ -120,3 +120,5 @@ npm install --save-dev semantic-release
 Next add **release.config.js** to contain semantic release info
 
 After this we make a pull-request with feat: ... to develop, and from UI merge develop to master to check semantic release happen for feat:
+
+Next is adding ./build and ./coverage assets as zip and making it available as part of the release when merged to master
