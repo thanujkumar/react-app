@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  #when pull-request created run workflow
+  #when pull-request created to develop run workflow
   pull_request:
     branches: [develop]
   #when pushed to develop run workflow
