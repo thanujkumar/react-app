@@ -124,3 +124,5 @@ After this we make a pull-request with feat: ... to develop, and from UI merge d
 Next is adding ./build and ./coverage assets as zip and making it available as part of the release when merged to master
 
 So total process is branch -> PR to Develop -> Merge to Develop -> PR to Master -> Merge to Master
+
+[https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
