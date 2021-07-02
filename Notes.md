@@ -35,7 +35,9 @@ my domain name is [https://thanujtk.surge.sh/](https://thanujtk.surge.sh/)
 
 Next is to use code formatting tool like [https://prettier.io/](https://prettier.io/), copy formatting rules from [https://prettier.io/playground/](https://prettier.io/playground/)
 
-Create **.prettierrc** file at project root and copy the json rules to be used by prettier and also create **.prettierignore** to include ignore file
+Create **.prettierrc** file at project root and copy the json rules to be used by prettier and also create **.prettierignore** to include ignore file.
+
+Make sure package.json has devDependencies for above libraries and those modules are added to package-lock.json by call npm install or npx install
 
 ```
 >> npm install --global prettier
