@@ -35,7 +35,9 @@ my domain name is [https://thanujtk.surge.sh/](https://thanujtk.surge.sh/)
 
 Next is to use code formatting tool like [https://prettier.io/](https://prettier.io/), copy formatting rules from [https://prettier.io/playground/](https://prettier.io/playground/)
 
-Create **.prettierrc** file at project root and copy the json rules to be used by prettier and also create **.prettierignore** to include ignore file
+Create **.prettierrc** file at project root and copy the json rules to be used by prettier and also create **.prettierignore** to include ignore file.
+
+Make sure package.json has devDependencies for above libraries and those modules are added to package-lock.json by call npm install or npx install
 
 ```
 >> npm install --global prettier
@@ -124,3 +126,5 @@ After this we make a pull-request with feat: ... to develop, and from UI merge d
 Next is adding ./build and ./coverage assets as zip and making it available as part of the release when merged to master
 
 So total process is branch -> PR to Develop -> Merge to Develop -> PR to Master -> Merge to Master
+
+[https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
