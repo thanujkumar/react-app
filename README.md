@@ -1,3 +1,10 @@
+
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1
+
+ ![](https://github.com/thanujkumar/java_evolution/workflows/CI/badge.svg?branch=develop&event=push)
+
+ ![](https://github.com/thanujkumar/java_evolution/workflows/CI/badge.svg?branch=master&event=push)
+
 # Getting Started with Create React App (sample)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
