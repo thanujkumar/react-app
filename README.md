@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="https://github.com/thanujkumar/react-app/actions?query=workflow%3ACI+branch%3Adevelop">
+    <img alt="Github Actions Build Status" src="https://img.shields.io/github/workflow/status/thanujkumar/react-app/CI?label=develop&style=flat-square%22"></a>
+</p>
+
 https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1
 
 ![](https://github.com/thanujkumar/react-app/workflows/CI/badge.svg?branch=develop&event=push) - Develop Branch
