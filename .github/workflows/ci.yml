@@ -75,3 +75,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx surge --project ./build --domain thanujtk.surge.sh
         # Above needs surge token,  defined at jobs level as environment variable
+      - name: Meta Info
+        run: |
+          echo ${{ steps.meta.outputs.tags }}
+          echo ${{ steps.meta.outputs.labels }}
