@@ -3,17 +3,17 @@ name: CI
 on:
   #when pull-request created to develop run workflow
   pull_request:
-    branches: [develop, master]
+    branches: [ develop, master ]
   #when pushed to develop run workflow
   push:
-    branches: [develop, master]
+    branches: [ develop, master ]
 env:
   REGISTRY: registry.hub.docker.com
   IMAGE: thanujtk/react-app
 
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: [ self-hosted ]
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -79,6 +79,6 @@ jobs:
         id: login-dockerhub
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-       - name: Docker Logout
-         run: |
-           docker logout ${{ steps.login-dockerhub.outputs.registry }}
+      - name: Docker Logout
+        run: |
+          docker logout ${{ steps.login-dockerhub.outputs.registry }}
