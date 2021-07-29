@@ -7,6 +7,9 @@ on:
   #when pushed to develop run workflow
   push:
     branches: [develop, master]
+env:
+  REGISTRY: registry.hub.docker.com
+  IMAGE: thanujtk/react-app
 
 jobs:
   build:
@@ -47,6 +50,12 @@ jobs:
         with:
           name: build-artifact
           path: build
+
+      - name: Build Docker Image
+        run: |
+          npm run build
+          docker build . -t ${{env.IMAGE}}
+
       - name: ZIP Release of Assets
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
