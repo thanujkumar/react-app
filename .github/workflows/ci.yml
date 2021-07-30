@@ -94,5 +94,5 @@ jobs:
           docker logout ${{ env.REGISTRY }}
           echo "${{ steps.login-dockerhome.outputs }}"
           echo "${{ steps.login-dockerhome.outputs.registry }}"
-          echo "${{ steps.login-dockerhome.outputs.[0] }}"
+          echo "${{ steps.login-dockerhome.outputs.logout }}"
       #https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions
