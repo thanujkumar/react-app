@@ -86,11 +86,10 @@ jobs:
         id: login-dockerhome
         uses: docker/login-action@v1.10.0
         with:
-          registry: home.nexus.com:8085
+          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERHOME_USERNAME }}
           password: ${{ secrets.DOCKERHOME_TOKEN }}
       - name: Docker Logout
         run: |
-          echo "::set-output name=my-registry::$(steps.login-dockerhome.outputs.registry)"
-          docker logout ${{ steps.login-dockerhome.outputs.registry }}
+          docker logout ${{ env.REGISTRY }}
       - run: echo "${{ steps.login-dockerhome.with.registry }}"
