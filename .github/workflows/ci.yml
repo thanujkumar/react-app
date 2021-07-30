@@ -8,7 +8,7 @@ on:
   push:
     branches: [ develop, master ]
 env:
-  REGISTRY: registry.hub.docker.com
+  REGISTRY: home.nexus.com:8085
   IMAGE: thanujtk/react-app
 
 jobs:
@@ -91,5 +91,5 @@ jobs:
           password: ${{ secrets.DOCKERHOME_TOKEN }}
       - name: Docker Logout
         run: |
-          echo ${{ steps.login-dockerhome.outputs.registry }}
+          echo "${{ steps.login-dockerhome.outputs.registry }}"
           docker logout ${{ steps.login-dockerhome.outputs.registry }}
