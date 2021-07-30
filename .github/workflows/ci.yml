@@ -90,4 +90,6 @@ jobs:
           username: ${{ secrets.DOCKERHOME_USERNAME }}
           password: ${{ secrets.DOCKERHOME_TOKEN }}
       - name: Docker Logout
-        run: docker logout ${{ steps.login-dockerhome.outputs.registry }}
+        run: |
+          echo ${{ steps.login-dockerhome.outputs.registry }}
+          docker logout ${{ steps.login-dockerhome.outputs.registry }}
