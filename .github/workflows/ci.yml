@@ -92,4 +92,4 @@ jobs:
       - name: Docker Logout
         run: |
           docker logout ${{ env.REGISTRY }}
-      - run: echo "${{ steps.login-dockerhome.with.registry }}"
+      - run: echo "${{ steps.login-dockerhome.outputs }}"
