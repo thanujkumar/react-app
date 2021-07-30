@@ -91,5 +91,6 @@ jobs:
           password: ${{ secrets.DOCKERHOME_TOKEN }}
       - name: Docker Logout
         run: |
-          echo "${{ steps.login-dockerhome.outputs.registry }}"
+          echo "::set-output name=my-registry::${{ steps.login-dockerhome.outputs.registry }}"
           docker logout ${{ steps.login-dockerhome.outputs.registry }}
+      - run: echo "${{ steps.login-dockerhome.outputs.registry }}"
