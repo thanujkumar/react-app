@@ -3,17 +3,17 @@ name: CI
 on:
   #when pull-request created to develop run workflow
   pull_request:
-    branches: [develop, master]
+    branches: [ develop, master ]
   #when pushed to develop run workflow
   push:
-    branches: [develop, master]
+    branches: [ develop, master ]
 env:
-  REGISTRY: registry.hub.docker.com
+  REGISTRY: home.nexus.com:8085
   IMAGE: thanujtk/react-app
 
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: [ self-hosted ]
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: "12.x"
       - run: npm ci
-      - run: npm run format:check
+      #- run: npm run format:check
       - run: npm test -- --coverage
         env:
           CI: true
@@ -75,3 +75,26 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx surge --project ./build --domain thanujtk.surge.sh
         # Above needs surge token,  defined at jobs level as environment variable
+      #      - name: Docker Login Using Docker CLI
+      #        id: login-dockerhub
+      #        run: |
+      #          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      #      - name: Docker Logout
+      #        run: |
+      #          docker logout ${{ steps.login-dockerhub.outputs.registry }}
+      - name: Docker Login
+        id: login-dockerhome
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHOME_USERNAME }}
+          password: ${{ secrets.DOCKERHOME_TOKEN }}
+      - name: Docker Logout
+        run: |
+          docker logout ${{ env.REGISTRY }}
+          echo "${{ steps.login-dockerhome.outputs }}"
+          echo "${{ steps.login-dockerhome.outputs.registry }}"
+          echo "${{ steps.login-dockerhome.outputs.logout }}"
+      #https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions
+
+
