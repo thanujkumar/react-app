@@ -76,9 +76,6 @@ jobs:
       #        id: login-dockerhub
       #        run: |
       #          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      #      - name: Docker Logout
-      #        run: |
-      #          docker logout ${{ steps.login-dockerhub.outputs.registry }}
       - name: Docker Tag
         id: dockertag
         run: |
@@ -88,12 +85,13 @@ jobs:
           echo "Last Tag Version = $TVER"
           echo "::set-output name=IMAGE_TAG::${TVER}-$(git rev-list --tags --max-count=1 | head -c8)"
         shell: bash
-
+      # Build image with above created tag
       - name: Build Docker Image
         run: |
           npm run build
           docker build . -t ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
 
+      #login if it is only master release, also using docker-cli as shown above
       - name: Docker Login
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         id: login-dockerhome
@@ -102,6 +100,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERHOME_USERNAME }}
           password: ${{ secrets.DOCKERHOME_TOKEN }}
+      #push image if it is master release
+      - name: Docker push
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          docker push ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
+      #logout from docker
       - name: Docker Logout
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
