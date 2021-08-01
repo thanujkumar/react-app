@@ -75,7 +75,7 @@ jobs:
       #      - name: Docker Login Using Docker CLI
       #        id: login-dockerhub
       #        run: |
-      #          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      #          echo ${{ secrets.DOCKERHOME_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Docker Tag
         id: dockertag
         run: |
@@ -104,7 +104,8 @@ jobs:
       - name: Docker push
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
-          docker push ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
+          echo "Pusing to registry ${{ env.REGISTRY }} for image ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}"
+          docker push ${{ env.REGISTRY }}/${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
       #logout from docker
       - name: Docker Logout
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
