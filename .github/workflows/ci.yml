@@ -19,6 +19,8 @@ jobs:
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 2
       - name: Cache node_modules
         uses: actions/cache@v2.1.6
         with:
@@ -66,7 +68,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.MYGITHUB_TOKEN}}
       - name: Deploy to Staging
         if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         run: npx surge --project ./build --domain thanujtk.surge.sh
@@ -82,6 +84,13 @@ jobs:
       #      - name: Docker Logout
       #        run: |
       #          docker logout ${{ steps.login-dockerhub.outputs.registry }}
+      - name: Docker Tag
+        id: dockertag
+        run: |
+          DTAG=$(git rev-list --tags --max-count=1)
+          echo "$DTAG"
+        shell: bash
+
       - name: Docker Login
         id: login-dockerhome
         uses: docker/login-action@v1.10.0
