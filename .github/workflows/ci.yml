@@ -90,9 +90,9 @@ jobs:
         shell: bash
 
       - name: Build Docker Image
-          run: |
-            npm run build
-            docker build . -t ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
+        run: |
+          npm run build
+          docker build . -t ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
 
       - name: Docker Login
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
