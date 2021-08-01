@@ -89,7 +89,7 @@ jobs:
       - name: Build Docker Image
         run: |
           npm run build
-          docker build . -t ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
+          docker build . -t ${{ env.REGISTRY }}/${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
 
       #login if it is only master release, also using docker-cli as shown above
       - name: Docker Login
