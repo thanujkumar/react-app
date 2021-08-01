@@ -90,7 +90,8 @@ jobs:
           DTAG=$(git rev-list --tags --max-count=1)
           echo "Latest Tag Commit-ID = $DTAG"
           TVER=$(git describe --tags $DTAG)
-          echo "$TVER"
+          echo "Last Tag Version = $TVER"
+          echo "::set-output name=IMAGE_TAG::${TVER}-$(git rev-list --tags --max-count=1 | head -c8)"
         shell: bash
 
       - name: Docker Login
