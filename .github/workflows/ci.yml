@@ -88,7 +88,9 @@ jobs:
         id: dockertag
         run: |
           DTAG=$(git rev-list --tags --max-count=1)
-          echo "$DTAG"
+          echo "Latest Tag Commit-ID = $DTAG"
+          TVER=$(git describe --tags $DTAG)
+          echo "$TVER"
         shell: bash
 
       - name: Docker Login
