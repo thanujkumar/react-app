@@ -101,26 +101,26 @@ jobs:
           npm run build
           docker build . -t ${{ env.REGISTRY }}/${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
 
-      #login if it is only master release, also using docker-cli as shown above
-      - name: Docker Login
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        id: login-dockerhome
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.DOCKERHOME_USERNAME }}
-          password: ${{ secrets.DOCKERHOME_TOKEN }}
-      #push image if it is master release
-      - name: Docker push
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
-          echo "Pusing to registry ${{ env.REGISTRY }} for image ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}"
-          docker push ${{ env.REGISTRY }}/${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
-      #logout from docker
-      - name: Docker Logout
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
-          docker logout ${{ env.REGISTRY }}
-          echo "Image Tag is = ${{ steps.dockertag.outputs.IMAGE_TAG }}"
-
-      #https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions
+#      #login if it is only master release, also using docker-cli as shown above
+#      - name: Docker Login
+#        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+#        id: login-dockerhome
+#        uses: docker/login-action@v1.10.0
+#        with:
+#          registry: ${{ env.REGISTRY }}
+#          username: ${{ secrets.DOCKERHOME_USERNAME }}
+#          password: ${{ secrets.DOCKERHOME_TOKEN }}
+#      #push image if it is master release
+#      - name: Docker push
+#        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+#        run: |
+#          echo "Pusing to registry ${{ env.REGISTRY }} for image ${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}"
+#          docker push ${{ env.REGISTRY }}/${{env.IMAGE}}:${{ steps.dockertag.outputs.IMAGE_TAG }}
+#      #logout from docker
+#      - name: Docker Logout
+#        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+#        run: |
+#          docker logout ${{ env.REGISTRY }}
+#          echo "Image Tag is = ${{ steps.dockertag.outputs.IMAGE_TAG }}"
+#
+#      #https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions
