@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: [ubuntu-20.04]
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
