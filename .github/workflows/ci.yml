@@ -124,3 +124,5 @@ jobs:
 #          echo "Image Tag is = ${{ steps.dockertag.outputs.IMAGE_TAG }}"
 #
 #      #https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions
+
+#     # above for self hosted
